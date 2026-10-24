@@ -3,54 +3,107 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>stream</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #050506;
-        --card: #171a22;
-        --ink: #f4f6fb;
-        --muted: #9aa1b2;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: var(--bg);
-        color: var(--ink);
-        font-family: "Segoe UI", system-ui, sans-serif;
-      }
-
-      main {
-        width: min(640px, calc(100% - 32px));
-        padding: 32px;
-        border-radius: 24px;
-        background: var(--card);
-      }
-
-      h1 {
-        margin: 0 0 8px;
-        font-size: 1.75rem;
-        font-weight: 650;
-      }
-
-      p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.5;
-      }
-    </style>
+    <meta name="theme-color" content="#000000" />
+    <title>Wavecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23c9d2fb' d='M4 13a8 8 0 0 1 16 0v1h-3v6h3a2 2 0 0 0 2-2v-5a10 10 0 0 0-20 0v5a2 2 0 0 0 2 2h3v-6H4z'/%3E%3C/svg%3E" />
   </head>
   <body>
-    <main>
-      <h1>Hello, stream</h1>
-      <p>GitHub Pages is serving this app. A podcast player for any feed URL comes next.</p>
-    </main>
+    <div class="stage">
+      <main class="player">
+        <header class="top">
+          <div class="brand">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3.5" y="12.5" width="4" height="7" rx="1.4"/><rect x="16.5" y="12.5" width="4" height="7" rx="1.4"/></svg>
+            </span>
+            Wavecast
+          </div>
+          <div class="top-actions">
+            <button id="add-feed" class="icon-button" type="button" aria-label="Add podcast feed">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg></span>
+            </button>
+            <button id="share" class="icon-button" type="button" aria-label="Copy link">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="m8 11 7-3.2M8 13l7 3.2"/></svg></span>
+            </button>
+          </div>
+        </header>
+
+        <section class="now" aria-label="Now playing">
+          <p class="kicker">Now playing</p>
+          <div class="now-main">
+            <div id="art" class="art"></div>
+            <div class="now-copy">
+              <h2 id="ep-title">Nothing playing</h2>
+              <p id="show-name" class="show-name">Add a podcast feed</p>
+              <p id="ep-meta" class="ep-meta"></p>
+            </div>
+          </div>
+          <div class="scrub">
+            <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Playback position" disabled />
+            <div class="times">
+              <span id="time-now">0:00</span>
+              <span id="time-end">0:00</span>
+            </div>
+          </div>
+          <div class="transport">
+            <button id="back" class="ctrl" type="button" aria-label="Back 15 seconds" disabled></button>
+            <button id="prev" class="ctrl" type="button" aria-label="Previous episode" disabled></button>
+            <button id="play" class="ctrl" type="button" data-icon="play" aria-label="Play"></button>
+            <button id="next" class="ctrl" type="button" aria-label="Next episode" disabled></button>
+            <button id="forward" class="ctrl" type="button" aria-label="Forward 30 seconds" disabled></button>
+          </div>
+          <div class="transport-meta">
+            <span>−15 sec</span>
+            <button id="speed" class="speed" type="button">1.0× speed</button>
+          </div>
+        </section>
+
+        <section class="library" aria-label="Library">
+          <h2>Your library</h2>
+          <div class="views" role="tablist">
+            <button class="view" type="button" data-view="podcasts" role="tab">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10h2v4H3zm4-4h2v12H7zm4-3h2v18h-2zm4 3h2v12h-2zm4 4h2v4h-2z"/></svg></span>
+              <strong>Podcasts</strong>
+              <span>Subscriptions</span>
+            </button>
+            <button class="view" type="button" data-view="episodes" role="tab" aria-selected="true">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 7h11M9 12h11M9 17h11"/><path d="M4 7h.01M4 12h.01M4 17h.01" stroke-width="3"/></svg></span>
+              <strong>Episodes</strong>
+              <span>Latest first</span>
+            </button>
+            <button class="view" type="button" data-view="saved" role="tab">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 4.5h10a1 1 0 0 1 1 1V20l-6-3.2L6 20V5.5a1 1 0 0 1 1-1z"/></svg></span>
+              <strong>Saved</strong>
+              <span>Favorites</span>
+            </button>
+          </div>
+          <p id="status" class="status" role="status"></p>
+          <div id="library-body"></div>
+        </section>
+        <noscript><p class="status is-error">JavaScript is required to load a feed and play audio.</p></noscript>
+      </main>
+    </div>
+
+    <dialog id="feed-dialog">
+      <form id="feed-form" class="sheet">
+        <h3>Add a podcast</h3>
+        <p>Paste the RSS feed URL. It is saved in this browser only.</p>
+        <label>
+          Feed URL
+          <input id="feed-url" type="url" name="feed" required placeholder="https://example.com/feed.xml" autocomplete="off" />
+        </label>
+        <p id="feed-error" class="status" role="status"></p>
+        <div class="dialog-actions">
+          <button id="feed-cancel" class="ghost" type="button">Cancel</button>
+          <button id="feed-submit" class="primary" type="submit">Add</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status"></div>
+    <audio id="audio" preload="none" referrerpolicy="no-referrer"></audio>
+    <script src="app.js"></script>
   </body>
 </html>

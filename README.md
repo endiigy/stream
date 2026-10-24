@@ -1,23 +1,25 @@
 # stream
 
-A static [GitHub Pages](https://pages.github.com/) app that plays a podcast from a feed URL you provide. Nothing is hardcoded: paste a feed, load its episodes, and listen in the browser.
+Wavecast is a static GitHub Pages podcast player. Paste any feed URL, or open `?feed=` with one, and the episodes play in the browser. Feeds are stored in this browser only. None are built into the site.
+
+## Use it
+
+1. Open the page and choose the search icon.
+2. Paste a podcast RSS URL and add it.
+3. Play from the episode list. Back skips 15 seconds, forward skips 30, and the speed control cycles the rate.
+4. Podcasts, Episodes, and Saved switch the library. The bookmark on an episode keeps it in Saved.
+5. The share icon copies a link that reopens the current feed.
+
+The feed file has to be readable from the browser. Audio files are played directly from the enclosure URL.
 
 ## Pages
 
-The site is `index.html` at the repository root. After the first push to `main`:
-
-1. Open **Settings → Pages**.
-2. Set the source to **Deploy from a branch**.
-3. Choose the `main` branch and the `/ (root)` folder.
-
-The site is then published at `https://endiigy.github.io/stream/`.
+`index.html` is the site root. In **Settings → Pages**, deploy the `main` branch from `/ (root)`. The site is published at `https://endiigy.github.io/stream/`.
 
 ## Local preview
-
-Open `index.html` in a browser, or serve the folder:
 
 ```powershell
 python -m http.server 8080
 ```
 
-Then visit `http://localhost:8080`.
+Open `http://localhost:8080`.
