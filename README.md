@@ -1,6 +1,8 @@
 # stream
 
-Wavecast is a static GitHub Pages podcast player. Paste any feed URL, or open `?feed=` with one, and the episodes play in the browser. Feeds are stored in this browser only. None are built into the site.
+Wavecast is a static GitHub Pages podcast player. Paste any feed URL, or open `?feed=` with one, and the episodes play in the browser. Feeds you add are stored in this browser only.
+
+Seeing Light is included in `saved/seeing-light/` and opens under Saved, playing the audio from this site.
 
 ## Use it
 

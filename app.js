@@ -49,9 +49,9 @@ function el(tag, attrs = {}, ...children) {
   return node;
 }
 
-function safeHttpUrl(value) {
+function safeHttpUrl(value, base = location.href) {
   try {
-    const url = new URL(value, location.href);
+    const url = new URL(value, base);
     if (url.protocol === "http:" || url.protocol === "https:") return url.href;
   } catch { /* ignore invalid urls */ }
   return "";
@@ -163,7 +163,7 @@ function itemAudio(item) {
 function parseRss(channel, feedUrl) {
   const image = channelImage(channel);
   const episodes = directChildren(channel, "item").map((item) => {
-    const audioUrl = safeHttpUrl(itemAudio(item));
+    const audioUrl = safeHttpUrl(itemAudio(item), feedUrl);
     if (!audioUrl) return null;
     const date = Date.parse(childText(item, "pubDate"));
     return {
@@ -174,14 +174,14 @@ function parseRss(channel, feedUrl) {
       date: Number.isNaN(date) ? "" : new Date(date).toISOString(),
       duration: parseDuration(childText(item, "itunes:duration")),
       audio: audioUrl,
-      image: safeHttpUrl(directChildren(item, "itunes:image")[0]?.getAttribute("href") || image),
+      image: safeHttpUrl(directChildren(item, "itunes:image")[0]?.getAttribute("href") || image, feedUrl),
     };
   }).filter(Boolean);
   episodes.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
   return {
     title: plain(childText(channel, "title")) || "Untitled podcast",
     description: plain(childText(channel, "description")).slice(0, 600),
-    image: safeHttpUrl(image),
+    image: safeHttpUrl(image, feedUrl),
     episodes: episodes.slice(0, 200),
   };
 }
@@ -189,7 +189,7 @@ function parseRss(channel, feedUrl) {
 function parseAtom(feed, feedUrl) {
   const image = channelImage(feed);
   const episodes = directChildren(feed, "entry").map((entry) => {
-    const audioUrl = safeHttpUrl(itemAudio(entry));
+    const audioUrl = safeHttpUrl(itemAudio(entry), feedUrl);
     if (!audioUrl) return null;
     const date = Date.parse(childText(entry, "published") || childText(entry, "updated"));
     return {
@@ -200,14 +200,14 @@ function parseAtom(feed, feedUrl) {
       date: Number.isNaN(date) ? "" : new Date(date).toISOString(),
       duration: parseDuration(childText(entry, "itunes:duration")),
       audio: audioUrl,
-      image: safeHttpUrl(image),
+      image: safeHttpUrl(image, feedUrl),
     };
   }).filter(Boolean);
   episodes.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
   return {
     title: plain(childText(feed, "title")) || "Untitled podcast",
     description: plain(childText(feed, "subtitle")).slice(0, 600),
-    image: safeHttpUrl(image),
+    image: safeHttpUrl(image, feedUrl),
     episodes: episodes.slice(0, 200),
   };
 }
@@ -724,6 +724,22 @@ async function shareLink() {
   }
 }
 
+async function loadBundledShow() {
+  const localFeed = new URL("saved/seeing-light/feed.xml", document.baseURI).href;
+  const already = state.feeds.some((feed) => feed.url === localFeed);
+  await ingest(localFeed, !already && !state.current);
+  if (already) return;
+  const feed = feedByUrl(localFeed);
+  if (!feed) return;
+  for (const episode of feed.episodes) {
+    const key = episodeKey(episode);
+    if (!state.saved.includes(key)) state.saved.push(key);
+  }
+  state.view = "saved";
+  persist();
+  render();
+}
+
 async function boot() {
   for (const id of ["back", "prev", "play", "next", "forward"]) {
     const names = { back: "back", prev: "prev", play: "play", next: "next", forward: "forward" };
@@ -735,6 +751,11 @@ async function boot() {
   audio.playbackRate = state.speed;
   bind();
   render();
+  try {
+    await loadBundledShow();
+  } catch (error) {
+    setStatus(error.message, "error");
+  }
   const requested = new URLSearchParams(location.search).get("feed");
   if (requested) {
     $("feed-url").value = requested;

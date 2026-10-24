@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Seeing Light</title>
+  <description>Alex and Jordan teach light and shadow, composition, color science, black and white, and Lightroom masking as one system for wildlife photography.
+
+AI Generated</description>
+  <language>en</language>
+  <itunes:explicit>false</itunes:explicit>
+  <atom:link href="https://muse.ai/podcasts/feed/1402228299640064/313815cc-f653-4dd2-b0bd-7d932002c14c" rel="self" type="application/rss+xml"/>
+  <itunes:image href="cover.png"/>
+  <image>
+    <url>cover.png</url>
+    <title>Seeing Light</title>
+    <link>https://muse.ai/podcasts/feed/1402228299640064/313815cc-f653-4dd2-b0bd-7d932002c14c</link>
+  </image>
+  <item>
+    <title>Seeing Light, Episode One: Quality</title>
+    <description>Alex and Jordan explain light quality, apparent source size, hard and soft light, shadow edges, contrast ratio, and why dawn mist helps white plumage, using Matthew&apos;s misty wood storks frames.
+
+AI Generated</description>
+    <enclosure url="ep-ecc289ce-4462-4c66-8266-d22d2dc6a7a9.mp3" length="4141669" type="audio/mpeg"/>
+    <guid isPermaLink="false">ep-ecc289ce-4462-4c66-8266-d22d2dc6a7a9</guid>
+    <pubDate>Sat, 24 Oct 2026 15:51:04 +0000</pubDate>
+    <itunes:duration>517</itunes:duration>
+  </item>
+  <item>
+    <title>Seeing Light, Episode Two: Direction</title>
+    <description>Alex and Jordan explain front light, side light, and backlight, plus rim light, silhouettes, spot metering, and exposure compensation for dawn wildlife photography.
+
+AI Generated</description>
+    <enclosure url="ep-4ed4afdc-ff96-4e4f-bdef-55727d2dae06.mp3" length="3941221" type="audio/mpeg"/>
+    <guid isPermaLink="false">ep-4ed4afdc-ff96-4e4f-bdef-55727d2dae06</guid>
+    <pubDate>Sat, 24 Oct 2026 15:51:15 +0000</pubDate>
+    <itunes:duration>492</itunes:duration>
+  </item>
+  <item>
+    <title>Seeing Light, Episode Three: Composition and Light Placement</title>
+    <description>Alex and Jordan explain composition as light placement, including pools of light, background brightness, subject separation, tonal layers, light lines, and shadow negative space.
+
+AI Generated</description>
+    <enclosure url="ep-dc93932f-2527-4f4c-be3e-27f9a2d03460.mp3" length="4554661" type="audio/mpeg"/>
+    <guid isPermaLink="false">ep-dc93932f-2527-4f4c-be3e-27f9a2d03460</guid>
+    <pubDate>Sat, 24 Oct 2026 15:51:25 +0000</pubDate>
+    <itunes:duration>569</itunes:duration>
+  </item>
+  <item>
+    <title>Seeing Light, Episode Four: Color Science</title>
+    <description>Alex and Jordan explain color science for wildlife photography, including white balance as a creative choice, Kelvin through the day, mixed light, camera profiles, and saturation versus luminance.
+
+AI Generated</description>
+    <enclosure url="ep-3e6258a5-8b46-4397-bf75-4d2a3ea63581.mp3" length="4539685" type="audio/mpeg"/>
+    <guid isPermaLink="false">ep-3e6258a5-8b46-4397-bf75-4d2a3ea63581</guid>
+    <pubDate>Sat, 24 Oct 2026 15:51:37 +0000</pubDate>
+    <itunes:duration>567</itunes:duration>
+  </item>
+  <item>
+    <title>Seeing Light, Episode Five: When Black and White</title>
+    <description>Alex and Jordan explain when black and white strengthens a wildlife photograph, the tonal translation test, and how the Lightroom Black and White Mix works like color filters.
+
+AI Generated</description>
+    <enclosure url="ep-7b8f553e-f7ad-4cd0-a2ca-68a9328cca96.mp3" length="4070437" type="audio/mpeg"/>
+    <guid isPermaLink="false">ep-7b8f553e-f7ad-4cd0-a2ca-68a9328cca96</guid>
+    <pubDate>Sat, 24 Oct 2026 15:51:43 +0000</pubDate>
+    <itunes:duration>508</itunes:duration>
+  </item>
+  <item>
+    <title>Seeing Light, Episode Six: Lightroom Masking and the Capstone</title>
+    <description>Alex and Jordan explain Lightroom masking as re-lighting, including subject, background, linear, radial, brush, and range masks, practical recipes, and a capstone that runs the whole course on one frame.
+
+AI Generated</description>
+    <enclosure url="ep-1235f2ec-4d31-42ad-8067-084b53354349.mp3" length="4314469" type="audio/mpeg"/>
+    <guid isPermaLink="false">ep-1235f2ec-4d31-42ad-8067-084b53354349</guid>
+    <pubDate>Sat, 24 Oct 2026 15:51:55 +0000</pubDate>
+    <itunes:duration>539</itunes:duration>
+  </item>
+</channel>
+</rss>
